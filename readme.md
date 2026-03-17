@@ -1,6 +1,6 @@
 # lb_multi_drift
 
-A Python tool that snapshots a golden (reference) database, detects schema drift across multiple target environments, auto-remediates each one using Liquibase, and confirms alignment — producing a full audit trail of reports and DDL for every environment processed.
+A Python script that snapshots a golden (reference) database, detects schema drift across multiple target environments, auto-remediates each one using Liquibase, and confirms alignment — producing a full audit trail of reports and DDL for every environment processed.
 
 ---
 
