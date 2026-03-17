@@ -1,0 +1,35 @@
+# multi_env_drift config
+# output_dir: where snapshots, changelogs, and reports are written
+
+output_dir: output
+
+golden:
+  url: "jdbc:postgresql://localhost:5433/golden"
+  username: postgres
+  password: secret
+
+targets:
+  - name: db1
+    url: "jdbc:postgresql://localhost:5433/db1"
+    username: postgres
+    password: secret
+
+  - name: db2
+    url: "jdbc:postgresql://localhost:5433/db2"
+    username: postgres
+    password: secret
+
+  - name: db3
+    url: "jdbc:postgresql://localhost:5433/db3"
+    username: postgres
+    password: secret
+
+  - name: db4
+    url: "jdbc:postgresql://localhost:5433/db4"
+    username: postgres
+    password: secret
+
+  - name: db5
+    url: "jdbc:postgresql://localhost:5433/db5"
+    username: postgres
+    password: secret

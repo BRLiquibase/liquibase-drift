@@ -1,0 +1,49 @@
+##########################################################
+# deploy.flowfile.yaml
+# Baseline deployment flow for Firstsource i-Leverage DB
+# Called by: deploy-pipeline.yml
+##########################################################
+
+globalVariables:
+  CHANGELOG_FILE: "changelog/master.xml"
+  REPORT_PATH: "reports/"
+  REPORT_NAME: "deploy_report"
+
+stages:
+  Validate:
+    actions:
+      - type: liquibase
+        command: status
+        cmdArgs:
+          verbose: true
+
+  DryRun:
+    actions:
+      - type: liquibase
+        command: updateSql
+        cmdArgs:
+          changeLogFile: "${CHANGELOG_FILE}"
+          outputFile: "reports/pending_changes.sql"
+
+  Deploy:
+    actions:
+      - type: liquibase
+        command: tag
+        cmdArgs:
+          tag: "pre-deploy-${DEPLOY_TAG}"
+
+      - type: liquibase
+        command: update
+        cmdArgs:
+          changeLogFile: "${CHANGELOG_FILE}"
+          reports-enabled: true
+          report-path: "${REPORT_PATH}"
+          report-name: "${REPORT_NAME}"
+
+  Verify:
+    actions:
+      - type: liquibase
+        command: status
+        cmdArgs:
+          changeLogFile: "${CHANGELOG_FILE}"
+          verbose: true
